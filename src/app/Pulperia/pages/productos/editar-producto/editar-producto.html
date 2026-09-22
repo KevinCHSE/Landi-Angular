@@ -1,0 +1,57 @@
+   <div class="modal-overlay">
+    <div class="modal-caja" role="dialog" aria-labelledby="titulo-modal">
+
+      <div class="modal-header">
+        <h2 id="titulo-modal">Editar producto</h2>
+
+      </div>
+
+      <div class="form-producto">
+
+        <div class="form-campo">
+          <label for="nombre-producto">Nombre del producto</label>
+          <input type="text" id="nombre-producto" [value]="name()" placeholder="Ej. Arroz 1kg" (input)="name.set(txtName.value)" #txtName/>
+        </div>
+
+        <div class="form-campo">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" (change)="categoria.set(txtCategoria.value)" #txtCategoria>
+            <option  disabled>Seleccionar categoría...</option>
+            <option selected>{{categoria()}}</option>
+            <option>Lácteos</option>
+            <option>Panadería</option>
+            <option>Otra</option>
+          </select>
+        </div>
+
+        <div class="form-campo">
+          <label for="precio">Precio (₡)</label>
+          <input type="number" id="precio" [value]="price()" placeholder="850" (input)="price.set(txtPrice.valueAsNumber)" #txtPrice/>
+        </div>
+
+        <div class="modal-acciones">
+          <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+          <button type="button" class="btn-guardar" (click)="actualizar()">Actualizar producto</button>
+        </div>
+
+        <div>
+          @if (!name()&& price()===0 && errorMensaje().length>0) {
+            <span>Se requiere todos los campos</span>
+          }
+        </div>
+
+        <!-- Solo aparece cuando el producto ya existe -->
+        <div class="restock-seccion">
+          <p class="restock-titulo">Reabastecer</p>
+          <p class="restock-actual">Stock actual: <strong>{{stock()}}</strong></p>
+
+          <div class="restock-fila">
+            <input type="number" min="1" placeholder="Ej. 24" (input)="newStock.set(txtStock.valueAsNumber)" #txtStock/>
+            <button type="button" class="btn-restock" (click)="ActualizarStock()">Agregar stock</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>

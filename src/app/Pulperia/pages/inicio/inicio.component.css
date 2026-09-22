@@ -1,0 +1,47 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  padding-left: 11%;
+}
+
+.contenido {
+  flex: 1;
+  padding: 1.5rem 2rem;
+
+}
+
+h1 {
+  margin: 0 0 1.25rem;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.tarjeta-metrica {
+  background: #f5f4ef;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.tarjeta-metrica__etiqueta {
+  font-size: 13px;
+  color: var(--gris-texto-suave);
+  margin: 0 0 4px;
+}
+
+.tarjeta-metrica__valor {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.vacio {
+  color: var(--gris-texto-suave);
+  font-size: 14px;
+}

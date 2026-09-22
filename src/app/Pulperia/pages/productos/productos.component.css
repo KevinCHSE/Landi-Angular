@@ -1,0 +1,137 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  padding-left: 11%;
+}
+
+.contenido {
+  flex: 1;
+  padding: 1.5rem 2rem;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.boton-primario {
+  background: var(--azul-600);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.buscador {
+  width: 280px;
+  margin-bottom: 1rem;
+  padding: 8px 10px;
+  border: 0.5px solid var(--borde);
+  border-radius: 6px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  text-align: left;
+  padding: 8px 4px;
+  font-weight: 400;
+  color: var(--gris-texto-suave);
+  border-bottom: 0.5px solid var(--borde);
+}
+
+td {
+  padding: 10px 4px;
+  border-bottom: 0.5px solid var(--borde);
+}
+
+.texto-suave {
+  color: var(--gris-texto-suave);
+}
+
+.stock-bajo {
+  color: #993c1d;
+  font-weight: 500;
+}
+
+.vacio {
+  color: var(--gris-texto-suave);
+  font-size: 14px;
+}
+.acciones-fila {
+  display: inline-flex;
+  border: 0.5px solid var(--borde);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.btn-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  background: #fff;
+  color: var(--gris-texto-suave);
+  cursor: pointer;
+}
+
+.btn-icono + .btn-icono {
+  border-left: 0.5px solid var(--borde);
+}
+
+.btn-icono svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-icono:hover {
+  background-color: #f3f4f6;
+  color: var(--azul-700);
+}
+
+/* El de eliminar, en hover, se pone rojo en vez de azul */
+.btn-icono:first-child:hover {
+  color: #dc2626;
+  background-color: #fee2e2;
+}
+
+.vacio-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--gris-texto-suave);
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+
+.etiqueta--arribaLimite {
+  background: var(--exito-fondo);
+  color: var(--exito-texto);
+}
+
+.etiqueta--abajoLimite {
+  background: var(--alerta-fondo);
+  color: var(--alerta-texto);
+}
+

@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --azul-900: #042C53;
+  --azul-800: #0C447C;
+  --azul-600: #185FA5;
+  --azul-400: #378ADD;
+  --azul-200: #85B7EB;
+  --azul-100: #B5D4F4;
+  --azul-50: #E6F1FB;
+
+  --gris-texto: #444441;
+  --gris-texto-suave: #5F5E5A;
+  --borde: #D3D1C7;
+
+  --exito-fondo: #EAF3DE;
+  --exito-texto: #27500A;
+  --alerta-fondo: #FAEEDA;
+  --alerta-texto: #633806;
+}

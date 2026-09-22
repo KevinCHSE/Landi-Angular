@@ -1,0 +1,174 @@
+* {
+  box-sizing: border-box;
+}
+
+/* ===== Fondo oscuro detrás del modal ===== */
+.modal-overlay {
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== Caja blanca del modal ===== */
+.modal-caja {
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 24px 26px;
+  width: 340px;
+  max-width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Encabezado ===== */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.modal-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #111827;
+}
+
+.modal-cerrar {
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modal-cerrar:hover {
+  color: #4b5563;
+}
+
+/* ===== Formulario: contenedor general ===== */
+.form-producto {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada campo, incluida la categoría, va en columna: label arriba, input abajo */
+.form-campo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-campo label {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.form-campo input,
+.form-campo select {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111827;
+  background-color: #ffffff;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-campo select {
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 100px;
+}
+
+.form-campo input::placeholder {
+  color: #9ca3af;
+}
+
+.form-campo input:focus,
+.form-campo select:focus {
+  outline: none;
+  border-color: #1a56a0;
+  box-shadow: 0 0 0 3px rgba(26, 86, 160, 0.12);
+}
+
+/* Precio y stock van uno al lado del otro, misma altura y separación que el resto */
+.form-fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.form-fila .form-campo {
+  margin-bottom: 0;
+}
+
+/* ===== Estado de error ===== */
+.form-campo input.ng-invalid.ng-touched,
+.form-campo select.ng-invalid.ng-touched {
+  border-color: #dc2626;
+}
+
+.form-error {
+  font-size: 12px;
+  color: #dc2626;
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+
+/* ===== Botones ===== */
+.modal-acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.btn-cancelar {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  color: #1f2937;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-cancelar:hover {
+  background-color: #f3f4f6;
+}
+
+.btn-guardar {
+  flex: 1;
+  background-color: #1a56a0;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-guardar:hover:not(:disabled) {
+  background-color: #164a89;
+}
+
+.btn-guardar:disabled {
+  background-color: #93b4d6;
+  cursor: not-allowed;
+}

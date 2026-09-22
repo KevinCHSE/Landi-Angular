@@ -1,0 +1,49 @@
+<div class="modal-overlay">
+  <div class="modal-caja" role="dialog" aria-labelledby="titulo-modal">
+
+    <div class="modal-header">
+      <h2 id="titulo-modal">Nuevo producto</h2>
+    </div>
+
+    <!--sirve para tomar el control de ciertos componentes de HTML como el form, esto para que no recargue la pagina justo despues de haber terminado de ejecutar el metodo-->
+    <form (submit)="$event.preventDefault(); guardarProducto()">
+
+      <div class="form-campo">
+        <label for="nombre-producto">Nombre del producto</label>
+        <input type="text" id="nombre-producto" placeholder="Ej. Arroz 1kg" (input)="nombre.set(txtName.value)"  #txtName />
+      </div>
+
+      <div class="form-campo">
+        <label for="categoria">Categoría</label>
+        <select id="categoria" (change)="categoria.set($any($event.target).value)">
+          <option value="" disabled selected>Seleccionar categoría...</option>
+          @for (categoria of categorias; track categoria) {
+            <option [value]="categoria">{{ categoria }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-fila">
+        <div class="form-campo">
+          <label for="precio">Precio (₡)</label>
+          <input type="number" id="precio"  placeholder="850" (input)="precio.set(txtPrice.valueAsNumber)"  #txtPrice/>
+        </div>
+        <div class="form-campo">
+          <label for="stock">Stock inicial</label>
+          <input type="number" id="stock" placeholder="24" style="width: 75px;" (input)="stock.set(txtStock.valueAsNumber)"  #txtStock/>
+        </div>
+      </div>
+
+      <div class="modal-acciones">
+        <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-guardar">Guardar</button>
+      </div>
+
+      @if (guardando()===false && errorMensaje().length>0) {
+        <label> Se requiere todos los campos</label>
+      }
+
+    </form>
+
+  </div>
+</div>

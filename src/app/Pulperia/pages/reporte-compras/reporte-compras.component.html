@@ -1,0 +1,77 @@
+<div class="layout">
+
+  <main class="contenido">
+    <h1>Compras por cliente</h1>
+
+    <div class="filtros">
+      <div>
+        <label for="cliente">Cliente</label>
+        <select id="cliente" [(ngModel)]="selectClient">
+          <option [ngValue]="null">seleccione el cliente</option>
+          @for (client of getClient.value() ; track client.id) {
+            <option [ngValue]="client">{{client.name}}</option>
+          }
+        </select>
+      </div>
+      <div>
+        <label for="inicio">Fecha inicio</label>
+        <input id="inicio" type="date" [value]="selectStartDate()" (input)="selectStartDate.set(txtStartDate.value)"  #txtStartDate/>
+      </div>
+      <div>
+        <label for="final">Fecha final</label>
+        <input id="final" type="date" [value]="selectEndDate()" (input)="selectEndDate.set(txtEndDate.value)"  #txtEndDate/>
+      </div>
+      <button class="boton-primario" type="button" (click)="getReport()">Consultar</button>
+    </div>
+
+    @if (invoices()!==null) {
+
+
+      <div class="tarjeta-total">
+      <p class="tarjeta-total__etiqueta">Total del período</p>
+      <p class="tarjeta-total__valor">{{invoices()?.total}}</p>
+    </div>
+    <div class="tarjeta-total">
+      <p class="tarjeta-total__etiqueta">Total a contado</p>
+      <p class="tarjeta-total__valor">{{invoices()?.cash}}</p>
+    </div>
+    <div class="tarjeta-total">
+      <p class="tarjeta-total__etiqueta">Total fiado</p>
+      <p class="tarjeta-total__valor">{{invoices()?.onCredit}}</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Productos</th>
+          <th>Monto</th>
+          <th>tipo de pago</th>
+        </tr>
+      </thead>
+      <tbody>
+          @for (invoice of invoices()?.purchases ?? []; track invoice.items) {
+              <tr>
+                <td>{{invoice.date }}</td>
+                <td>
+                  @for (item of invoice.items; track item.item; let last = $last) {
+                    {{ item.item }} x{{ item.amount }}{{ last ? '' : ', ' }}
+                  }
+                </td>
+                <td>{{invoice.total}}</td>
+                <td>{{invoice.payment}}</td>
+              </tr>
+            } @empty {
+              <tr><td colspan="4">No hay compras en este rango.</td></tr>
+            }
+      </tbody>
+    </table>
+    }@else {
+      <span>No se ha encontrado ningun cliente...</span>
+    }
+
+
+    <!-- si no hay compras en el rango, mostrar en su lugar: -->
+    <!-- <p class="vacio">Este cliente no tiene compras en ese rango de fechas.</p> -->
+  </main>
+</div>

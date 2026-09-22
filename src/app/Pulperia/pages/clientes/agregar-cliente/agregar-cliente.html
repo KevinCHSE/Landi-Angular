@@ -1,0 +1,40 @@
+<div class="modal-overlay">
+  <div class="modal-caja" role="dialog" aria-labelledby="titulo-modal">
+
+    <div class="modal-header">
+      <h2 id="titulo-modal">Nuevo cliente</h2>
+      <button type="button" class="modal-cerrar" aria-label="Cerrar" (click)="cancelar()">&times;</button>
+    </div>
+
+    <!--sirve para tomar el control de ciertos componentes de HTML como el form, esto para que no recargue la pagina justo despues de haber terminado de ejecutar el metodo-->
+    <form class="form-cliente" (submit)="$event.preventDefault(); saveClient()">
+
+      <div class="form-campo">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej. María Jiménez" required  (input)="name.set(txtName.value)" #txtName/>
+      </div>
+
+      <div class="form-campo">
+        <label for="cedula">Cédula</label>
+        <input type="text" id="cedula" name="cedula" placeholder="1-2345-6789" required (input)="id.set(txtId.value)" #txtId/>
+      </div>
+
+      <div class="form-campo">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="8888-8888" required (input)="phone.set(txtPhone.value)" #txtPhone/>
+      </div>
+
+      <div class="form-campo">
+        <label for="limite">Límite de fiado (₡)</label>
+        <input type="number" id="limite" name="limite" placeholder="20000" min="0" (input)="limit.set(txtLimit.valueAsNumber)" #txtLimit />
+      </div>
+
+      <div class="modal-acciones">
+        <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-guardar">Guardar cliente</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>

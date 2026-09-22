@@ -1,0 +1,16 @@
+  <nav class="navbar-vertical">
+    <div class="nav-logo">
+      <h2>Pulpería</h2>
+    </div>
+    <ul class="nav-links">
+      @for (pages of paginas; track pages; let id=$index) {
+          @if (pages.roles.includes("ROLE_ADMIN") && roles().includes("ROLE_ADMIN")) {
+            <li><a [routerLink]="pages.url">{{pages.name}}</a></li>
+          }@else if (pages.roles.includes("ROLE_USER") && roles().includes("ROLE_USER")) {
+            <li><a [routerLink]="pages.url">{{pages.name}}</a></li>
+          }
+
+      }
+        <li (click)="logOut()"><a>LogOut</a></li>
+    </ul>
+  </nav>

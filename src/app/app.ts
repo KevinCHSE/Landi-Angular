@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavBar } from './Pulperia/nav-bar/nav-bar';
 
 @Component({
   selector: 'app-root',

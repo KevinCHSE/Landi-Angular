@@ -1,0 +1,25 @@
+<div class="layout">
+  <main class="contenido">
+    <h1>Inicio</h1>
+
+    <section class="tarjetas">
+      <div class="tarjeta-metrica">
+        <p class="tarjeta-metrica__etiqueta">Clientes activos</p>
+        <p class="tarjeta-metrica__valor">{{clientCount.value()}}</p>
+      </div>
+      <div class="tarjeta-metrica">
+        <p class="tarjeta-metrica__etiqueta">Ventas del mes</p>
+        <p class="tarjeta-metrica__valor">{{getTotal.value()}}</p>
+      </div>
+      <div class="tarjeta-metrica">
+        <p class="tarjeta-metrica__etiqueta">Productos bajos en stock</p>
+        <p class="tarjeta-metrica__valor">{{needStock.value()}}</p>
+      </div>
+
+    </section>
+        <reporteCompras></reporteCompras>
+  </main>
+
+
+</div>
+

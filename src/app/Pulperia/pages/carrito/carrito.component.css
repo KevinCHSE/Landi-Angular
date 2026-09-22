@@ -1,0 +1,120 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  padding-left: 11%;
+}
+
+.contenido {
+  flex: 1;
+  padding: 1.5rem 2rem;
+}
+
+.columnas {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.columna-formulario {
+  flex: 1;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+label {
+  font-size: 13px;
+  color: var(--gris-texto-suave);
+  display: block;
+  margin-bottom: 4px;
+}
+
+select,
+input[type='number'] {
+  padding: 8px 10px;
+  border: 0.5px solid var(--borde);
+  border-radius: 6px;
+}
+
+select {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.fila-agregar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.fila-agregar select {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.fila-agregar input {
+  width: 60px;
+}
+
+.fila-agregar-Factura{
+  margin-top:10px;
+  width: 120px;
+}
+
+.boton-primario {
+  background: var(--azul-600);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+.boton-primario:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.boton-ancho {
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 12px;
+}
+
+.resumen {
+  width: 280px;
+  background: #fff;
+  border: 0.5px solid var(--borde);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  height: fit-content;
+}
+
+.resumen__titulo {
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0 0 12px;
+}
+
+.fila-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 0.5px solid var(--borde);
+  font-size: 14px;
+}
+
+.fila-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.vacio {
+  color: var(--gris-texto-suave);
+  font-size: 14px;
+}

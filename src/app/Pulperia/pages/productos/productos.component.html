@@ -1,0 +1,90 @@
+<div class="layout">
+  <main class="contenido">
+    <div class="encabezado">
+      <h1>Productos</h1>
+      <button class="boton-primario" type="button" routerLink="agregarProducto">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path fill="currentColor" d="M11.5 12.5H6v-1h5.5V6h1v5.5H18v1h-5.5V18h-1z" />
+        </svg>
+        <i class="ti ti-plus"></i>
+        Agregar producto
+      </button>
+    </div>
+
+    <input type="text" class="buscador" [(ngModel)]="filtrarTabla" placeholder="Buscar producto..." />
+    @if (getProducts.isLoading()) {
+      <p class="vacio">Cargando productos...</p>
+    } @else if (getProducts.error()) {
+      <p class="vacio error">Ocurrió un error al cargar los productos.</p>
+    } @else if (getProducts.value()?.length === 0) {
+      <p class="vacio">No se encontraron productos.</p>
+    } @else {
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Activo</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of getProducts.value() | searchProduct:filtrarTabla ; track product) {
+            <tr>
+              <td>{{product.name}}</td>
+              <td class="texto-suave">{{product.type}}</td>
+              <td>₡{{product.price}}</td>
+              <td>
+                <span [class.etiqueta--arribaLimite]="product.stock>5"
+                      [class.etiqueta--abajoLimite]="product.stock<=5">
+                      {{product.stock}}
+                </span>
+              </td>
+              <td>{{product.active}}</td>
+              <td>
+                <div class="acciones-fila">
+                  @if (product.active===true) {
+                    <button type="button" class="btn-icono" aria-label="Eliminar Product" (click)="desactivarProduct(product)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6zM2 6h20m-12 5v5m4-5v5" />
+                      </svg>
+                    </button>
+                  }@else {
+                    <button type="button" class="btn-icono" aria-label="Activar Product" (click)="ActivarProducto(product)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path fill="none" stroke="currentColor" stroke-dasharray="48" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.25 14c0.89 3.45 4.02 6 7.75 6c4.42 0 8 -3.58 8 -8c0 -4.42 -3.58 -8 -8 -8c-2.39 0 -4.53 1.05 -6 2.71l-2 2.29">
+                          <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="48;0" />
+                        </path>
+                        <g fill="currentColor">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M5.63 7.38l-2.13 -2.13l0 4.25l4.25 0Z" opacity="0">
+                            <set fill="freeze" attributeName="opacity" begin="0.6s" to="1" />
+                            <animate fill="freeze" attributeName="d" begin="0.6s" dur="0.2s" values="M4 9l0 0l0 0l0 0Z;M5.63 7.38l-2.13 -2.13l0 4.25l4.25 0Z" />
+                          </path>
+                          <circle cx="12" cy="12">
+                            <animate fill="freeze" attributeName="r" begin="0.8s" dur="0.2s" to="2" />
+                          </circle>
+                        </g>
+                      </svg>
+
+                    </button>
+
+                  }
+
+                  <button type="button" class="btn-icono" aria-label="Editar producto" [routerLink]="['/Products/editarProducto', product.id]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M3.995 17.207V19.5a.5.5 0 0 0 .5.5h2.298a.5.5 0 0 0 .353-.146l9.448-9.448l-3-3l-9.452 9.448a.5.5 0 0 0-.147.353m10.837-11.04l3 3l1.46-1.46a1 1 0 0 0 0-1.414l-1.585-1.586a1 1 0 0 0-1.414 0z" />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </main>
+</div>
