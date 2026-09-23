@@ -5,7 +5,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { invoiceQueryReport } from '../Models/report/invoiceQueryReport';
 import { invoiceReport } from '../Models/report/invoiceReport';
-import { environment } from '../../../Environments/environments.development';
+import { environment } from '../../../Environments/environment';
+
 
 
 @Injectable({
