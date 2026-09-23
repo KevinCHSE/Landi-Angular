@@ -32,6 +32,16 @@
   padding: 16px 20px;
   margin-bottom: 24px;
 }
+.sales-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #c7fed0;
+  border: 1px solid #c7fed0;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
 
 .summary-label { font-size: 0.95rem; color: #92400e; }
 .summary-amount { font-size: 1.75rem; font-weight: 700; color: #b45309; }

@@ -44,7 +44,7 @@ export class productosComponent{
     product.active=true;
       this.service.updateProduct(product.id!,product).subscribe({
         next:()=>{
-          console.log("Desactivado")
+          console.log("Activado")
         }
       })
   }

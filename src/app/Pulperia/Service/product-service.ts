@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Products } from '../Models/Products';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../Environments/environments.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl="https://demo-vlte.onrender.com/apiProducts";
+  private apiUrl=`${environment.apiUrl}/apiProducts`
 
   constructor(private http: HttpClient) {}
 

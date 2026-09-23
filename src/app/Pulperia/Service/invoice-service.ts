@@ -5,13 +5,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { invoiceQueryReport } from '../Models/report/invoiceQueryReport';
 import { invoiceReport } from '../Models/report/invoiceReport';
+import { environment } from '../../../Environments/environments.development';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class InvoiceService {
-  private apiURL="https://demo-vlte.onrender.com/apiInvoice"
+  private apiURL=`${environment.apiUrl}/apiInvoice`
   http=inject(HttpClient);
 
   saveInvoice(invoice:invoiceRequest):Observable<invoiceRequest>{

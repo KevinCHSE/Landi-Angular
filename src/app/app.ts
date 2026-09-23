@@ -9,5 +9,7 @@ import { NavBar } from './Pulperia/nav-bar/nav-bar';
   styleUrl: './app.css'
 })
 export class App {
+  
+
   protected readonly title = signal('Landi');
 }

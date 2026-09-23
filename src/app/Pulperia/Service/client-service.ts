@@ -2,13 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import { Client } from '../Models/Client';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../Environments/environments.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientService {
   http=inject(HttpClient)
-  private apiURl:string="https://demo-vlte.onrender.com/apiClients"
+  private apiURl:string=`${environment.apiUrl}/apiClients`
 
   getClients():Observable<Client[]>{
     return this.http.get<Client[]>(`${this.apiURl}/getClients`);
