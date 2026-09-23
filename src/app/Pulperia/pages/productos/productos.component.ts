@@ -13,10 +13,11 @@ import { ProductService } from '../../Service/product-service';
 @Component({
   templateUrl:'productos.component.html',
   styleUrl:'productos.component.css',
-  imports: [RouterLink,SearchProductPipe,FormsModule]
+  imports: [SearchProductPipe,FormsModule]
 })
 export class productosComponent{
   service=inject(ProductService)
+  router=inject(Router)
   protected guardando = signal(false);
   protected errorMensaje = signal('');
   searchPipe=signal<string>("")
@@ -47,5 +48,10 @@ export class productosComponent{
           console.log("Activado")
         }
       })
+  }
+
+
+  EditarProducto(id:number){
+      this.router.navigate(["editarProducto",id])
   }
 }

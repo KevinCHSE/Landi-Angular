@@ -1,11 +1,12 @@
 import { Component, inject, signal } from "@angular/core";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 import { rxResource } from '@angular/core/rxjs-interop';
 import { switchMap, throwError, of } from 'rxjs';
 import { Client } from "../../Models/Client";
 import { ClientService } from "../../Service/client-service";
 import { SearchClientPipe } from "../../Pipes/search-client-pipe";
+import { EditarCliente } from './editar-cliente/editar-cliente';
 
 
 @Component({
@@ -14,9 +15,12 @@ import { SearchClientPipe } from "../../Pipes/search-client-pipe";
   imports: [RouterLink,SearchClientPipe]
 })
 export class clientesComponent{
-  //Injections
+    //Injections
     service=inject(ClientService)
+    routes=inject(Router)
+
     searchPipe=signal<string>("")
+
 
     getClients=rxResource({
       stream:(args)=>{
@@ -51,6 +55,10 @@ export class clientesComponent{
           console.log("error en ActivarCliente")
         }
       })
+    }
+
+    EditarCliente(id:string){
+      this.routes.navigate(["editarClient",id])
     }
 
 
