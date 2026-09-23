@@ -8,7 +8,7 @@ import { LoginInterface } from '../Interface/login-interface';
 })
 export class LoginService {
   http=inject(HttpClient)
-  private apiURl:string="http://localhost:8080"
+  private apiURl:string="https://demo-vlte.onrender.com"
 
   login(id:string, password:string):Observable<LoginInterface>{
       return this.http.post<LoginInterface>(`${this.apiURl}/login`,{id,password});

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class InvoiceDetailsService {
-    private apiURL:string="http://localhost:8080/apiInoviceDetails";
+    private apiURL:string="https://demo-vlte.onrender.com/apiInoviceDetails";
     http=inject(HttpClient)
 
   getTotal():Observable<number>{

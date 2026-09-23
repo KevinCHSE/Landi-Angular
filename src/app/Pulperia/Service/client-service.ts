@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ClientService {
   http=inject(HttpClient)
-  private apiURl:string="http://localhost:8080/apiClients"
+  private apiURl:string="https://demo-vlte.onrender.com/apiClients"
 
   getClients():Observable<Client[]>{
     return this.http.get<Client[]>(`${this.apiURl}/getClients`);

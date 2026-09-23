@@ -1,1 +1,46 @@
-<p>pago works!</p>
+<!-- pay-debt.component.html -->
+<div class="debt-container">
+  <header class="debt-header">
+    <h1>Estado de cuenta</h1>
+    <div class="client-info">
+      <span class="client-name"></span>
+      <span class="client-id"></span>
+    </div>
+  </header>
+
+  <section class="debt-summary">
+    <span class="summary-label">Deuda total</span>
+    <span class="summary-amount"></span>
+  </section>
+
+  <section class="purchases-section">
+    <h2>Compras realizadas</h2>
+    <table class="purchases-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio unit.</th>
+          <th>Subtotal</th>
+          <th>Pago</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+          </tr>
+
+      </tbody>
+    </table>
+  </section>
+
+  <section class="payment-section">
+    <label for="paymentAmount">Monto a pagar</label>
+    <input type="number" id="paymentAmount" #paymentAmount min="0" placeholder="0.00">
+    <button class="btn btn-primary" >Pagar deuda</button>
+  </section>
+
+  <footer class="debt-footer">
+    <button class="btn btn-secondary" >Generar PDF</button>
+  </footer>
+</div>

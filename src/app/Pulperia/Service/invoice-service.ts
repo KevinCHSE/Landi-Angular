@@ -11,7 +11,7 @@ import { invoiceReport } from '../Models/report/invoiceReport';
   providedIn: 'root',
 })
 export class InvoiceService {
-  private apiURL="http://localhost:8080/apiInvoice"
+  private apiURL="https://demo-vlte.onrender.com/apiInvoice"
   http=inject(HttpClient);
 
   saveInvoice(invoice:invoiceRequest):Observable<invoiceRequest>{
