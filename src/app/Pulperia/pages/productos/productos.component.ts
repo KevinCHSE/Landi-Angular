@@ -52,6 +52,6 @@ export class productosComponent{
 
 
   EditarProducto(id:number){
-      this.router.navigate(["editarProducto",id])
+      this.router.navigate(["Pulperia/Products/editarProducto",id])
   }
 }

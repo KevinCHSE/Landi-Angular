@@ -58,7 +58,7 @@ export class clientesComponent{
     }
 
     EditarCliente(id:string){
-      this.routes.navigate(["editarClient",id])
+      this.routes.navigate(["Pulperia/Clients/editarClient",id])
     }
 
 
