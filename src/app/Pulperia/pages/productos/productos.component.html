@@ -12,7 +12,8 @@
       </button>
     </div>
 
-    <input type="text" class="buscador" [(ngModel)]="filtrarTabla" placeholder="Buscar producto..." />
+    <input type="text" class="buscador" (input)="searchPipe.set(txtSearchClient.value)" placeholder="Buscar producto..." #txtSearchClient/>
+
     @if (getProducts.isLoading()) {
       <p class="vacio">Cargando productos...</p>
     } @else if (getProducts.error()) {
@@ -32,7 +33,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (product of getProducts.value() | searchProduct:filtrarTabla ; track product) {
+          @for (product of getProducts.value() | searchProduct:searchPipe() ; track product) {
             <tr>
               <td>{{product.name}}</td>
               <td class="texto-suave">{{product.type}}</td>

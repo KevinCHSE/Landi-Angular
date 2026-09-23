@@ -9,6 +9,7 @@ import { EditarProducto } from './pages/productos/editar-producto/editar-product
 import { AgregarCliente } from './pages/clientes/agregar-cliente/agregar-cliente';
 import { EditarCliente } from './pages/clientes/editar-cliente/editar-cliente';
 import { LayoutComponent } from './Layout/layout-component/layout-component';
+import { Pago } from './pages/inicio/pago/pago';
 
 
 export const Pulperia:Routes=[
@@ -17,6 +18,10 @@ export const Pulperia:Routes=[
     component:LayoutComponent,
     children:[
       {
+          path:"PayAccount",
+          component:Pago
+        },
+        {
           path:"Clients",
           component:clientesComponent
         },
@@ -46,7 +51,7 @@ export const Pulperia:Routes=[
         },
         {
           path:"**",
-          component:carritoComponent
+          component:inicioComponent
         },
     ]
   },

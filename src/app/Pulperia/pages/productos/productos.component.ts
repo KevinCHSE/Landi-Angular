@@ -19,7 +19,7 @@ export class productosComponent{
   service=inject(ProductService)
   protected guardando = signal(false);
   protected errorMensaje = signal('');
-  filtrarTabla:any;
+  searchPipe=signal<string>("")
 
 
   getProducts=rxResource({

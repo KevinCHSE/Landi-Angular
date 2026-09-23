@@ -24,7 +24,7 @@ export class LoginComponent {
     }
     this.service.login(this.idSignal(),this.passwordSignal()).subscribe({
       next:(token)=>{
-        this.route.navigate(["/Pulperia"])
+        this.route.navigate(["/Pulperia/shoppingCar"])
       },error:(err)=>{
         this.errorMessage.set("ID o password incorrectos")
       }

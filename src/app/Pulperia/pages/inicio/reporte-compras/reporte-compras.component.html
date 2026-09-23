@@ -22,6 +22,7 @@
         <input id="final" type="date" [value]="selectEndDate()" (input)="selectEndDate.set(txtEndDate.value)"  #txtEndDate/>
       </div>
       <button class="boton-primario" type="button" (click)="getReport()">Consultar</button>
+      <button class="boton-primario" type="button" (click)="payAccount()">Pagar Cuenta</button>
     </div>
 
     @if (invoices()!==null) {

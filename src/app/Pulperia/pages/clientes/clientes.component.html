@@ -13,7 +13,7 @@
       </button>
     </div>
 
-    <input type="text" class="buscador" placeholder="Buscar cliente..." />
+    <input type="text" class="buscador" (input)="searchPipe.set(txtSearchClient.value)" placeholder="Buscar cliente..."  #txtSearchClient/>
     @if (getClients.isLoading()) {
       <p class="vacio">Cargando productos...</p>
     } @else if (getClients.error()) {
@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (client of getClients.value() ; track client) {
+        @for (client of getClients.value() | searchClient:searchPipe() ; track client) {
           <tr>
             <td>{{client.name}}</td>
             <td>{{client.id}}</td>

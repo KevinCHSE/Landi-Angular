@@ -1,12 +1,15 @@
 import { Component, inject, signal } from "@angular/core";
 import { rxResource } from "@angular/core/rxjs-interop";
 import { of, switchMap, throwError } from 'rxjs';
-import { Client } from "../../Models/Client";
+
 import { FormsModule } from "@angular/forms";
-import { invoiceQueryReport } from '../../Models/report/invoiceQueryReport';
-import { invoiceReport } from "../../Models/report/invoiceReport";
-import { ClientService } from "../../Service/client-service";
-import { InvoiceService } from "../../Service/invoice-service";
+import { ClientService } from "../../../Service/client-service";
+import { InvoiceService } from "../../../Service/invoice-service";
+import { Client } from "../../../Models/Client";
+import { invoiceReport } from "../../../Models/report/invoiceReport";
+import { invoiceQueryReport } from "../../../Models/report/invoiceQueryReport";
+import { Router } from "@angular/router";
+
 
 
 
@@ -20,6 +23,7 @@ import { InvoiceService } from "../../Service/invoice-service";
 export class reporteComprasComponent{
   clientService=inject(ClientService)
   invoiceService=inject(InvoiceService)
+  router=inject(Router)
 
   //signals of HTML's inputs
   selectClient=signal<Client | null>(null);
@@ -45,7 +49,6 @@ export class reporteComprasComponent{
 
     this.invoiceService.getReport(query).subscribe({
       next:(response)=>{
-        console.log(response)
         this.invoices.set(response)
       },error:(err)=>{
         console.log(err)
@@ -62,5 +65,9 @@ export class reporteComprasComponent{
       )
     }
   })
+
+  payAccount(){
+    this.router.navigate(["/Pulperia/PayAccount"])
+  }
 
 }

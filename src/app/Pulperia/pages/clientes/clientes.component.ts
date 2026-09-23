@@ -1,20 +1,22 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { RouterLink } from "@angular/router";
 
 import { rxResource } from '@angular/core/rxjs-interop';
 import { switchMap, throwError, of } from 'rxjs';
 import { Client } from "../../Models/Client";
 import { ClientService } from "../../Service/client-service";
+import { SearchClientPipe } from "../../Pipes/search-client-pipe";
 
 
 @Component({
   templateUrl:'clientes.component.html',
   styleUrl:'clientes.component.css',
-  imports: [RouterLink]
+  imports: [RouterLink,SearchClientPipe]
 })
 export class clientesComponent{
   //Injections
     service=inject(ClientService)
+    searchPipe=signal<string>("")
 
     getClients=rxResource({
       stream:(args)=>{

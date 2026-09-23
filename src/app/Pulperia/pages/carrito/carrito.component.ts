@@ -14,6 +14,7 @@ import { InvoiceService } from "../../Service/invoice-service";
 
 
 @Component({
+  selector:"ShoppingCar",
   templateUrl:'carrito.component.html',
   styleUrl:'carrito.component.css',
   imports: [FormsModule]

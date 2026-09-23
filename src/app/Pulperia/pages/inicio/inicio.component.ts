@@ -1,11 +1,11 @@
 import { Component, inject } from "@angular/core";
-import { reporteComprasComponent } from "../reporte-compras/reporte-compras.component";
 
 import { rxResource } from "@angular/core/rxjs-interop";
 import { of, switchMap, throwError } from "rxjs";
 import { ClientService } from "../../Service/client-service";
 import { InvoiceDetailsService } from "../../Service/invoice-details-service";
 import { ProductService } from "../../Service/product-service";
+import { reporteComprasComponent } from "./reporte-compras/reporte-compras.component";
 
 
 
