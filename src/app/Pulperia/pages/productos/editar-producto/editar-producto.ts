@@ -55,7 +55,7 @@ export class EditarProducto {
   }
 
   cancelar(): void {
-  this.router.navigate(['/Products']);
+  this.router.navigate(['Pulperia/Products']);
   }
 
   actualizar():void{
@@ -70,7 +70,7 @@ export class EditarProducto {
     this.ProductService.updateProduct(newId, product).subscribe({
       next:()=>{
         this.cargando.set(false),
-        this.router.navigate(['/Products'])
+        this.router.navigate(['Pulperia/Products'])
       },
       error:(err)=>{
         this.cargando.set(false),
@@ -85,7 +85,7 @@ export class EditarProducto {
     this.ProductService.updateStock(newId,this.newStock()).subscribe({
       next:()=>{
         this.cargando.set(false),
-        this.router.navigate(['/Products'])
+        this.router.navigate(['Pulperia/Products'])
       },error:(err)=>{
         this.cargando.set(false),
         this.errorMensaje.set("No se pudo actualizar el Stock del producto")

@@ -36,8 +36,6 @@ export class EditarCliente {
       return
     }
 
-    console.log(this.idParam);
-
     this.service.getClient(this.idParam).subscribe({
       next:(client)=>{
         this.errorMessageUpdate.set("");
@@ -68,7 +66,7 @@ export class EditarCliente {
         console.log(client)
         console.log(this.idParam)
         this.updating.set(false);
-        this.router.navigate(["/Clients"])
+        this.router.navigate(["Pulperia/Clients"])
       },error:(err)=>{
         this.updating.set(false);
         this.errorMessageUpdate.set("No se logro actualizar el usuario")
@@ -80,6 +78,6 @@ export class EditarCliente {
 
 
   Cancelar(){
-    this.router.navigate(["/Clients"])
+    this.router.navigate(["Pulperia/Clients"])
   }
 }

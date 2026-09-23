@@ -8,6 +8,7 @@ import { of, switchMap, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { SearchProductPipe } from '../../Pipes/search-product-pipe';
 import { ProductService } from '../../Service/product-service';
+import { AgregarProducto } from './agregar-producto/agregar-producto';
 
 
 @Component({
@@ -53,5 +54,9 @@ export class productosComponent{
 
   EditarProducto(id:number){
       this.router.navigate(["Pulperia/Products/editarProducto",id])
+  }
+
+  AgregarProducto(){
+    this.router.navigate(["Pulperia/Products/agregarProducto"])
   }
 }
