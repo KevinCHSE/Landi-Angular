@@ -52,7 +52,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/Environments/environment.ts",
-                  "with": "src/Environments/environment.development.ts"
+                  "with": "src/Environments/environments.development.ts"
                 }
               ]
             }
