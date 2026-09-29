@@ -1,7 +1,7 @@
 .layout {
   display: flex;
   min-height: 100vh;
-  
+
 }
 
 .contenido {
@@ -92,3 +92,31 @@ td {
   color: var(--gris-texto-suave);
   font-size: 14px;
 }
+
+.payment-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
+  margin-bottom: 30px;
+ }
+.payment-section label { font-weight: 600; }
+.payment-section input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600; cursor: pointer; }
+.btn-primary { background: #059669; color: white; }
+.btn-primary:hover { background: #047857; }
+.btn-secondary { background: #ffffff; border: 1px solid #d1d5db; color: #374151; }
+.btn-secondary:hover { background: #f3f4f6; }
+

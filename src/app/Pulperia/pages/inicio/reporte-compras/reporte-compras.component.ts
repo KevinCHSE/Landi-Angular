@@ -34,10 +34,13 @@ export class reporteComprasComponent{
   //List to print the invoices
   invoices=signal<invoiceReport | null>(null)
 
+  //message
+  message=signal<string>("No se ha seleccionado ninguna fecha...")
+
 
   getReport(){
     if(!this.selectStartDate() || !this.selectEndDate() || !this.selectClient()){
-      console.log("rellene todos los datos")
+      this.message.set("rellene todos los datos")
       return
     }
     const query:invoiceQueryReport={
@@ -69,5 +72,5 @@ export class reporteComprasComponent{
   payAccount(){
     this.router.navigate(["/Pulperia/PayAccount"])
   }
-
+  
 }

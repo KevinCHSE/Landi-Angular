@@ -24,7 +24,8 @@ export class EditarCliente {
   fullName=signal<string>('')
   phone=signal<string>('')
   creditLimit=signal<number>(0)
-  balance=signal<number>(0)
+  UsedCredit=signal<number>(0)
+  TotalSpent=signal<number>(0)
   active=signal<boolean>(false)
 
 
@@ -42,7 +43,8 @@ export class EditarCliente {
         this.fullName.set(client.name);
         this.phone.set(client.phone);
         this.creditLimit.set(client.creditLimit)
-        this.balance.set(client.balance)
+        this.UsedCredit.set(client.usedCredit)
+        this.TotalSpent.set(client.totalSpent)
         this.active.set(client.active)
       },error:(err)=>{
         this.errorMessageUpdate.set("No se pudo cargar el cliente");
@@ -58,7 +60,8 @@ export class EditarCliente {
       name:this.fullName(),
       phone:this.phone(),
       creditLimit:this.creditLimit(),
-      balance:this.balance(),
+      usedCredit:this.UsedCredit(),
+      totalSpent:this.TotalSpent(),
       active:this.active()
     }
     this.service.updateCliente(this.idParam,client).subscribe({

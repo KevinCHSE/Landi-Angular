@@ -3,6 +3,7 @@ export interface Client {
   name: string;
   phone: string;
   creditLimit: number;
-  balance:number;
+  usedCredit:number;
+  totalSpent:number;
   active:boolean;
 }

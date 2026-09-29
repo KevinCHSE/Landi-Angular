@@ -44,7 +44,8 @@ export class AgregarCliente {
         id:this.id(),
         phone:this.phone(),
         creditLimit:this.limit(),
-        balance:0,
+        usedCredit:0,
+        totalSpent:0,
         active:true,
 
       }

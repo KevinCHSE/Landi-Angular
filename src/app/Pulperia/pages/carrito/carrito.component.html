@@ -64,8 +64,15 @@
         <button class="boton-primario boton-ancho" type="button" (click)="saveInvoice()">
           Registrar en su cuenta
         </button>
+
+        @if (ErrorMessage().length>0) {
+          <span>{{ErrorMessage()}}</span>
+        }
       </aside>
+
+
     </div>
+
   </main>
 </div>
 

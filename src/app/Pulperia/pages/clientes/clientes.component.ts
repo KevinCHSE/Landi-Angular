@@ -33,7 +33,7 @@ export class clientesComponent{
       }
     })
 
-    eliminarProducto(client:Client){
+    deleteClient(client:Client){
       client.active=false;
       this.service.updateCliente(client.id,client).subscribe({
         next:()=>{
@@ -45,7 +45,7 @@ export class clientesComponent{
       })
 
     }
-    ActivarCliente(client:Client){
+    ActivedClient(client:Client){
       client.active=true;
       this.service.updateCliente(client.id,client).subscribe({
         next:()=>{
@@ -57,7 +57,7 @@ export class clientesComponent{
       })
     }
 
-    EditarCliente(id:string){
+    updateClient(id:string){
       this.routes.navigate(["Pulperia/Clients/editarClient",id])
     }
 

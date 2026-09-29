@@ -22,14 +22,13 @@
         <input id="final" type="date" [value]="selectEndDate()" (input)="selectEndDate.set(txtEndDate.value)"  #txtEndDate/>
       </div>
       <button class="boton-primario" type="button" (click)="getReport()">Consultar</button>
-      <button class="boton-primario" type="button" (click)="payAccount()">Pagar Cuenta</button>
     </div>
 
     @if (invoices()!==null) {
 
 
-      <div class="tarjeta-total">
-      <p class="tarjeta-total__etiqueta">Total del período</p>
+    <div class="tarjeta-total">
+      <p class="tarjeta-total__etiqueta">Total</p>
       <p class="tarjeta-total__valor">{{invoices()?.total}}</p>
     </div>
     <div class="tarjeta-total">
@@ -67,8 +66,18 @@
             }
       </tbody>
     </table>
+
+    <section class="payment-section">
+      <label for="paymentAmount">Monto a pagar</label>
+      <input type="number" id="paymentAmount" #paymentAmount min="0" placeholder="0.00">
+      <button class="btn btn-primary" >Pagar deuda</button>
+    </section>
+
+    <footer class="debt-footer">
+      <button class="btn btn-secondary" >Generar PDF</button>
+    </footer>
     }@else {
-      <span>No se ha encontrado ningun cliente...</span>
+      <span>{{message()}}</span>
     }
 
 
