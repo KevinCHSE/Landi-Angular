@@ -9,6 +9,9 @@ import { Client } from "../../../Models/Client";
 import { invoiceReport } from "../../../Models/report/invoiceReport";
 import { invoiceQueryReport } from "../../../Models/report/invoiceQueryReport";
 import { Router } from "@angular/router";
+import { PaymentService } from '../../../Service/payment-service';
+import { paymentQuery } from "../../../Models/Payment/paymentQuery";
+import { payment } from '../../../Models/Payment/payment';
 
 
 
@@ -23,12 +26,14 @@ import { Router } from "@angular/router";
 export class reporteComprasComponent{
   clientService=inject(ClientService)
   invoiceService=inject(InvoiceService)
+  PaymentService=inject(PaymentService)
   router=inject(Router)
 
   //signals of HTML's inputs
   selectClient=signal<Client | null>(null);
   selectStartDate=signal<string>("")
   selectEndDate=signal<string>("")
+  paymentAmount=signal<number>(0)
 
 
   //List to print the invoices
@@ -53,6 +58,7 @@ export class reporteComprasComponent{
     this.invoiceService.getReport(query).subscribe({
       next:(response)=>{
         this.invoices.set(response)
+        this.message.set("")
       },error:(err)=>{
         console.log(err)
       }
@@ -70,7 +76,38 @@ export class reporteComprasComponent{
   })
 
   payAccount(){
-    this.router.navigate(["/Pulperia/PayAccount"])
+    if(!this.paymentAmount() || this.paymentAmount()===0){
+      this.message.set("Falta el monto que quiere pagar ")
+      return
+    }
+    if(!this.selectStartDate() || !this.selectEndDate() || !this.selectClient()){
+      this.message.set("rellene todos los datos")
+      return
+    }
+
+    this.message.set("")
+
+    const query:paymentQuery={
+      clientId:this.selectClient()?.id!,
+      amount:this.paymentAmount(),
+      startDate:this.selectStartDate(),
+      endDate:this.selectEndDate(),
+    }
+
+    this.PaymentService.savePayment(query).subscribe({
+      next:()=>{
+        this.selectClient.set(null)
+        this.selectStartDate.set("")
+        this.selectEndDate.set("")
+        this.paymentAmount.set(0)
+      },
+      error:(err)=>{
+        console.error("Error devuelto por el servidor:", err);
+        this.message.set(`Ocurrio un error a la hora de hacer el pago ${err}`)
+      }
+    })
+
+
   }
-  
+
 }

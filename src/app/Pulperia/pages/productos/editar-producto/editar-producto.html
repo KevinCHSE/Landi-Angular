@@ -6,11 +6,11 @@
 
       </div>
 
-      <div class="form-producto">
+      <form class="form-producto" (submit)="$event.defaultPrevented;actualizar()">
 
         <div class="form-campo">
           <label for="nombre-producto">Nombre del producto</label>
-          <input type="text" id="nombre-producto" [value]="name()" placeholder="Ej. Arroz 1kg" (input)="name.set(txtName.value)" #txtName/>
+          <input type="text" id="nombre-producto" [value]="name()" placeholder="Ej. Arroz 1kg" required (input)="name.set(txtName.value)" #txtName/>
         </div>
 
         <div class="form-campo">
@@ -26,18 +26,40 @@
 
         <div class="form-campo">
           <label for="precio">Precio (₡)</label>
-          <input type="number" id="precio" [value]="price()" placeholder="850" (input)="price.set(txtPrice.valueAsNumber)" #txtPrice/>
+          <input type="number" id="precio" [value]="price()" placeholder="850" required (input)="price.set(txtPrice.valueAsNumber)" #txtPrice/>
+        </div>
+
+
+        <div class="campo-imagen">
+            <label class="zona-imagen" for="imagen">
+            <input id="imagen" class="entrada-oculta" type="file" accept="image/*" required (change)="onImageSelected($event)" #image/>
+
+            <span class="miniatura">
+              <svg class="icono" viewBox="0 0 24 24" width="24" height="24" fill="none"
+                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <circle cx="9" cy="10" r="1.5" />
+                <path d="m21 16-5-5-8 8" />
+              </svg>
+            </span>
+
+            <span class="texto-imagen">
+              Arrastre la foto aquí o haga clic para elegirla
+              <small>PNG o JPG, hasta 2 MB</small>
+            </span>
+          </label>
+
+          <div class="fila-imagen">
+            @if (Image()) {
+              <button type="button" class="boton-quitar" (click)="quitarImagen(image)">Quitar foto</button>
+            }
+          </div>
         </div>
 
         <div class="modal-acciones">
           <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
-          <button type="button" class="btn-guardar" (click)="actualizar()">Actualizar producto</button>
-        </div>
-
-        <div>
-          @if (!name()&& price()===0 && errorMensaje().length>0) {
-            <span>Se requiere todos los campos</span>
-          }
+          <button type="submit" class="btn-guardar" >Actualizar producto</button>
         </div>
 
         <!-- Solo aparece cuando el producto ya existe -->
@@ -51,7 +73,13 @@
           </div>
         </div>
 
-      </div>
+        <div>
+          @if (cargando()===false&& errorMensaje().length>0) {
+            <span>Se requiere todos los campos</span>
+          }
+        </div>
+
+      </form>
 
     </div>
   </div>

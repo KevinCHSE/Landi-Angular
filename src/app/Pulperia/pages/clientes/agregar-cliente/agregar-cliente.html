@@ -26,13 +26,19 @@
 
       <div class="form-campo">
         <label for="limite">Límite de fiado (₡)</label>
-        <input type="number" id="limite" name="limite" placeholder="20000" min="0" (input)="limit.set(txtLimit.valueAsNumber)" #txtLimit />
+        <input type="number" id="limite" name="limite" placeholder="20000" min="0" required  (input)="limit.set(txtLimit.valueAsNumber)" #txtLimit />
       </div>
 
       <div class="modal-acciones">
         <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
         <button type="submit" class="btn-guardar">Guardar cliente</button>
       </div>
+
+      <div>
+          @if (guardando()===false&& errorMessage().length>0) {
+            <span>Se requiere todos los campos</span>
+          }
+        </div>
 
     </form>
 

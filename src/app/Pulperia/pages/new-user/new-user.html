@@ -1,0 +1,61 @@
+<div class="modal-overlay">
+  <div class="modal-caja" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+
+    <div class="modal-header">
+      <h2 id="titulo-modal">Nuevo usuario</h2>
+    </div>
+
+    <form (submit)="$event.preventDefault(); saveUser()">
+
+      <div class="form-campo">
+        <label for="nombre-usuario">Nombre</label>
+        <input id="nombre-usuario" name="name" type="text"
+               placeholder="Ej. María Rojas" autocomplete="off" required
+               (input)="name.set(txtName.value)" #txtName/>
+      </div>
+
+      <div class="form-fila">
+        <div class="form-campo">
+          <label for="cedula-usuario">Cédula</label>
+          <input id="cedula-usuario" name="id" type="text"
+                 placeholder="Ej. 1-2345-6789" autocomplete="off" required
+                 (input)="id.set(txtId.value)" #txtId/>
+        </div>
+        <div class="form-campo">
+          <label for="telefono-usuario">Teléfono</label>
+          <input id="telefono-usuario" name="phone" type="tel"
+                 placeholder="Ej. 8888-8888" autocomplete="off" required
+                 (input)="phone.set(txtPhone.value)" #txtPhone/>
+        </div>
+      </div>
+
+      <div class="form-campo">
+        <label for="clave-usuario">Contraseña</label>
+        <input id="clave-usuario" name="password" type="password"
+               placeholder="Mínimo 6 caracteres" autocomplete="new-password"
+               minlength="6" required
+               (input)="phone.set(txtPhone.value)" #txtPhone/>
+      </div>
+
+      <div class="form-campo">
+        <label for="rol-usuario">Rol</label>
+        <select id="rol-usuario" name="rol" (change)="role.set(Role.value)" #Role>
+          @for (rol of roles ; track rol[0]) {
+            <option value="{{rol[0]}}" selected>{{rol[1]}}</option>
+          }
+        </select>
+      </div>
+
+      <div class="modal-acciones">
+        <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-guardar">Guardar</button>
+      </div>
+      <div style="margin-top: 20px;">
+          @if (guardando()===false&& errorMessage().length>0) {
+            <span class="error-form">{{errorMessage()}}</span>
+          }
+        </div>
+
+    </form>
+  </div>
+</div>

@@ -23,21 +23,29 @@
       </div>
       <button class="boton-primario" type="button" (click)="getReport()">Consultar</button>
     </div>
-
+    @if(message().length>0) {
+      <div class="MessageError">
+        <span>{{message()}}</span>
+      </div>
+    }
     @if (invoices()!==null) {
 
 
     <div class="tarjeta-total">
-      <p class="tarjeta-total__etiqueta">Total</p>
+      <p class="tarjeta-total__etiqueta">Total desde {{selectStartDate()}} al {{selectEndDate()}}</p>
       <p class="tarjeta-total__valor">{{invoices()?.total}}</p>
     </div>
     <div class="tarjeta-total">
-      <p class="tarjeta-total__etiqueta">Total a contado</p>
+      <p class="tarjeta-total__etiqueta">Total a contado desde {{selectStartDate()}} al {{selectEndDate()}}</p>
       <p class="tarjeta-total__valor">{{invoices()?.cash}}</p>
     </div>
     <div class="tarjeta-total">
-      <p class="tarjeta-total__etiqueta">Total fiado</p>
+      <p class="tarjeta-total__etiqueta">Total fiado desde {{selectStartDate()}} al {{selectEndDate()}}</p>
       <p class="tarjeta-total__valor">{{invoices()?.onCredit}}</p>
+    </div>
+    <div class="tarjeta-total">
+      <p class="tarjeta-total__etiqueta">Lo que debe </p>
+      <p class="tarjeta-total__valor">{{selectClient()?.usedCredit}}</p>
     </div>
 
     <table>
@@ -69,15 +77,13 @@
 
     <section class="payment-section">
       <label for="paymentAmount">Monto a pagar</label>
-      <input type="number" id="paymentAmount" #paymentAmount min="0" placeholder="0.00">
-      <button class="btn btn-primary" >Pagar deuda</button>
+      <input type="number" min="0" placeholder="0.00" (input)="paymentAmount.set(txtAmount.valueAsNumber)" #txtAmount>
+      <button class="btn btn-primary" (click)="payAccount()" >Pagar deuda</button>
     </section>
 
     <footer class="debt-footer">
       <button class="btn btn-secondary" >Generar PDF</button>
     </footer>
-    }@else {
-      <span>{{message()}}</span>
     }
 
 

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from "@angular/core";
+import { Component, computed, inject, signal } from "@angular/core";
 import { rxResource } from "@angular/core/rxjs-interop";
 
 import { forkJoin, of, switchMap, throwError } from "rxjs";
@@ -11,28 +11,29 @@ import { Client } from "../../Models/Client";
 import { ClientService } from "../../Service/client-service";
 import { ProductService } from "../../Service/product-service";
 import { InvoiceService } from "../../Service/invoice-service";
+import { ProductImageService } from "../../Service/product-image-service";
+import { SearchProductPipe } from "../../Pipes/search-product-pipe";
 
 
 @Component({
   selector:"ShoppingCar",
   templateUrl:'carrito.component.html',
   styleUrl:'carrito.component.css',
-  imports: [FormsModule]
+  imports: [FormsModule,SearchProductPipe]
 })
 export class carritoComponent{
 
   serviceClient=inject(ClientService)
   serviceProduct=inject(ProductService)
   serviceInvoice=inject(InvoiceService)
+  serviceImage=inject(ProductImageService)
 
   //Errors
   ErrorMessage=signal<string>("")
 
 
   //Client
-  selectedClient = signal<Client | null>(null);
-  //variables which are need to addItem
-  selectedProduct = signal<Products | null>(null);
+  selectedClient = signal<string | null>(null);
   amount=signal<number>(1)
 
   //save Invoice
@@ -41,22 +42,25 @@ export class carritoComponent{
   invoiceItem=signal<CartItem[]>([])
   invoiceTotal=signal(0)
 
+  //searchProduct
+  product=signal<string>("")
+
 
   //button addItem
-    addItem(){
-      if(this.selectedProduct()!=null){
+    addItem(product:Products){
+      if(product!=null){
       const items=this.invoiceItem();
-      const exist= items.find(item=>item.product.id===this.selectedProduct()?.id)
+      const exist= items.find(item=>item.product.id===product?.id)
         if(!exist){
-          this.invoiceItem.set([...items, {product:this.selectedProduct()!,amount:this.amount()}])
+          this.invoiceItem.set([...items, {product:product!,amount:this.amount()}])
         }else{
         this.invoiceItem.set(
           items.map(
-            item=>item.product.id===this.selectedProduct()?.id?
+            item=>item.product.id===product?.id?
             {...item,amount:item.amount+this.amount()}:item,
           )
         )}
-        this.invoiceTotal.update(total=>total+(this.selectedProduct()!.price*this.amount()));
+        this.invoiceTotal.update(total=>total+(product!.price*this.amount()));
       }
     }
 
@@ -92,6 +96,14 @@ export class carritoComponent{
         )
       }
     })
+    protected productosActivos = computed(() =>
+      (this.getProducts.value() ?? []).filter(p => p.active)
+    );
+    protected sinImagen = signal<ReadonlySet<number>>(new Set());
+
+    protected marcarSinImagen(id: number): void {
+      this.sinImagen.update(s => new Set(s).add(id));
+    }
 
     //create invoice
     saveInvoice():void{
@@ -104,13 +116,14 @@ export class carritoComponent{
   const items = this.invoiceItem();
 
   const invoice: invoiceRequest = {
-    clientId: this.selectedClient()?.id!,
+    clientId: this.selectedClient()!,
     payment: this.selectedPayment(),
     items: items.map(item => ({
       productId: item.product.id!,
       amount: item.amount
     }))
   };
+
 
 
   /**forkJoin consulta el stock de todos los productos del carrito en paralelo. switchMap decide: si falta stock, lanza un error que cae en tu error:; si todo está bien, hace el POST. */

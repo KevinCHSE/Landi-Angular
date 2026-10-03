@@ -1,0 +1,147 @@
+:host {
+  display: block;
+  --texto: #1f2328;
+  --texto-suave: #6b6f76;
+  --fondo-suave: #f4f3ee;
+  --borde: #e2e0d8;
+  --azul: #1a5ea8;
+  --verde: #0f7a4d;
+}
+
+.abonos {
+  padding: 1.5rem;
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.titulo {
+  margin: 0 0 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+/* Filtros */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: min(100%, 22rem);
+}
+
+.campo label {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.control {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.control::placeholder {
+  color: var(--texto-suave);
+}
+
+.control:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 1px;
+}
+
+/* Mensajes de estado */
+.mensaje {
+  margin: 0 0 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 6px;
+  background: var(--fondo-suave);
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+
+.mensaje[hidden] {
+  display: none;
+}
+
+/* Tabla */
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+  min-width: 42rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.tabla th {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tabla td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--borde);
+}
+
+.tabla tbody tr:hover {
+  background: var(--fondo-suave);
+}
+
+.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.monto {
+  color: var(--verde);
+  font-weight: 600;
+}
+
+.saldo {
+  font-weight: 600;
+}
+
+/* Solo para lectores de pantalla */
+.solo-lector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.div-button{
+  margin-top: 25px;
+}
+.boton-primario {
+  background: var(--azul-600);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .abonos {
+    padding: 1rem;
+  }
+}

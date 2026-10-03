@@ -204,3 +204,108 @@
   color: #6b7280;
   margin: 8px 0 0;
 }
+.campo-imagen {
+  --texto: #1f2328;
+  --texto-suave: #6b6f76;
+  --fondo-suave: #f4f3ee;
+  --borde: #d6d3c9;
+  --azul: #1a5ea8;
+  --azul-claro: #e8f0fa;
+  --error: #b3261e;
+  max-width: 28rem;
+}
+
+.zona-imagen {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.6rem 0.9rem;
+  border: 1.5px dashed var(--borde);
+  border-radius: 10px;
+  background: var(--fondo-suave);
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.zona-imagen:hover {
+  border-color: var(--azul);
+}
+
+/* Se activa con la clase "arrastrando" cuando una foto pasa por encima */
+.zona-imagen.arrastrando {
+  border-color: var(--azul);
+  background: var(--azul-claro);
+}
+
+.zona-imagen:focus-within {
+  outline: 2px solid var(--azul);
+  outline-offset: 2px;
+}
+
+/* El input sigue accesible con el teclado, pero no se ve */
+.entrada-oculta {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.miniatura {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--texto-suave);
+}
+
+.vista-previa {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.texto-imagen small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  opacity: 0.85;
+}
+
+.fila-imagen {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 1.5rem;
+  margin-top: 0.4rem;
+}
+
+.boton-quitar {
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.boton-quitar:hover {
+  background: var(--fondo-suave);
+}
+
+.error-imagen {
+  margin: 0;
+  color: var(--error);
+  font-size: 0.85rem;
+}

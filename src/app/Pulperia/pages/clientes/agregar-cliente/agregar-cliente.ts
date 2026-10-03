@@ -32,7 +32,7 @@ export class AgregarCliente {
 
   saveClient(){
       if(!this.name() || !this.id() || !this.phone() || this.limit()===0 ){
-        this.errorMessage.set("You must fill out every field");
+        this.errorMessage.set("Todos los dostos tienen que estar");
         return;
       }
 
@@ -55,7 +55,7 @@ export class AgregarCliente {
           this.guardando.set(false);
           this.router.navigate(["Pulperia/Clients"])
         },error:((err)=>{
-          this.errorMessage.set("The client was not save")
+          this.errorMessage.set("No se logro guardar los datos del cliente")
         })
       })
 

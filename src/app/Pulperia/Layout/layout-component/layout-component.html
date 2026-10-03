@@ -1,5 +1,7 @@
-<nav-bar></nav-bar>
+<div style="display: flex; min-height: 100vh;">
+  <nav-bar></nav-bar>
 
-<section>
-  <router-outlet> </router-outlet>
-</section>
+  <main style="flex: 1; min-width: 0;">
+    <router-outlet></router-outlet>
+  </main>
+</div>

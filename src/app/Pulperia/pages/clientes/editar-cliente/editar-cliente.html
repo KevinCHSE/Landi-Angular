@@ -5,11 +5,11 @@
         <h2 id="titulo-modal">Editar cliente</h2>
       </div>
 
-      <div class="form-cliente">
+      <form class="form-cliente" (submit)="$event.preventDefault();updateClient()">
 
-        <div class="form-campo">
+        <div class="form-campo" >
           <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" [value]="fullName()" placeholder="Ej. María Jiménez" (input)="fullName.set(txtName.value)" #txtName/>
+          <input type="text" id="nombre" [value]="fullName()" placeholder="Ej. María Jiménez" required  (input)="fullName.set(txtName.value)" #txtName/>
         </div>
 
         <div class="form-campo">
@@ -19,12 +19,12 @@
 
         <div class="form-campo">
           <label for="telefono">Teléfono</label>
-          <input type="tel" id="telefono" [value]="phone()" placeholder="8888-8888" (input)="phone.set(txtphone.value)" #txtphone />
+          <input type="tel" id="telefono" [value]="phone()" placeholder="8888-8888" required (input)="phone.set(txtphone.value)"  #txtphone />
         </div>
 
         <div class="form-campo">
           <label for="limite">Límite de fiado (₡)</label>
-          <input type="number" id="limite" [value]="creditLimit()" placeholder="20000" min="0" (input)="creditLimit.set(txtCreditLimit.valueAsNumber)" #txtCreditLimit />
+          <input type="number" id="limite" [value]="creditLimit()" placeholder="20000" min="0" required (input)="creditLimit.set(txtCreditLimit.valueAsNumber)"  #txtCreditLimit />
         </div>
 
         <!-- Solo lectura: el saldo se calcula en base a las compras del cliente, no se edita acá -->
@@ -35,14 +35,16 @@
 
         <div class="modal-acciones">
           <button type="button" class="btn-cancelar" (click)="Cancelar()">Cancelar</button>
-          <button type="button" class="btn-guardar" (click)="updateClient()">Actualizar cliente</button>
+          <button type="submit" class="btn-guardar">Actualizar cliente</button>
         </div>
 
-        @if (updating()===false && errorMessageUpdate().length>0) {
-          <span>{{errorMessageUpdate()}}</span>
-        }
+        <div>
+          @if (guardando()===false&& errorMessage().length>0) {
+            <span>Se requiere todos los campos</span>
+          }
+        </div>
 
-      </div>
+      </form>
 
 
 

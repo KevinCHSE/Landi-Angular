@@ -10,12 +10,12 @@
 
       <div class="form-campo">
         <label for="nombre-producto">Nombre del producto</label>
-        <input type="text" id="nombre-producto" placeholder="Ej. Arroz 1kg" (input)="nombre.set(txtName.value)"  #txtName />
+        <input type="text" id="nombre-producto" placeholder="Ej. Arroz 1kg" required (input)="nombre.set(txtName.value)"  #txtName />
       </div>
 
       <div class="form-campo">
         <label for="categoria">Categoría</label>
-        <select id="categoria" (change)="categoria.set($any($event.target).value)">
+        <select id="categoria" required (change)="categoria.set($any($event.target).value)">
           <option value="" disabled selected>Seleccionar categoría...</option>
           @for (categoria of categorias; track categoria) {
             <option [value]="categoria">{{ categoria }}</option>
@@ -26,13 +26,40 @@
       <div class="form-fila">
         <div class="form-campo">
           <label for="precio">Precio (₡)</label>
-          <input type="number" id="precio"  placeholder="850" (input)="precio.set(txtPrice.valueAsNumber)"  #txtPrice/>
+          <input type="number" id="precio"  placeholder="850" required (input)="precio.set(txtPrice.valueAsNumber)"  #txtPrice/>
         </div>
         <div class="form-campo">
           <label for="stock">Stock inicial</label>
-          <input type="number" id="stock" placeholder="24" style="width: 75px;" (input)="stock.set(txtStock.valueAsNumber)"  #txtStock/>
+          <input type="number" id="stock" placeholder="24" style="width: 75px;" required (input)="stock.set(txtStock.valueAsNumber)"  #txtStock/>
         </div>
       </div>
+
+      <div class="campo-imagen">
+            <label class="zona-imagen" for="imagen">
+            <input id="imagen" class="entrada-oculta" type="file" accept="image/*" required (change)="onImageSelected($event)" #image/>
+
+            <span class="miniatura">
+              <svg class="icono" viewBox="0 0 24 24" width="24" height="24" fill="none"
+                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2" />
+                <circle cx="9" cy="10" r="1.5" />
+                <path d="m21 16-5-5-8 8" />
+              </svg>
+            </span>
+
+            <span class="texto-imagen">
+              Arrastre la foto aquí o haga clic para elegirla
+              <small>PNG o JPG, hasta 2 MB</small>
+            </span>
+          </label>
+
+          <div class="fila-imagen">
+            @if (Image()) {
+              <button type="button" class="boton-quitar" (click)="quitarImagen(image)">Quitar foto</button>
+            }
+          </div>
+        </div>
 
       <div class="modal-acciones">
         <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>

@@ -2,60 +2,96 @@
 
   <main class="contenido">
     <div class="columnas">
+
+      <!-- Columna izquierda: formulario y catálogo -->
       <section class="columna-formulario">
-        <h1>Nueva compra </h1>
+        <h1>Nueva compra</h1>
 
-        <label for="cliente">Cliente</label>
-        <select id="cliente" [(ngModel)]="selectedClient" name="producto">
-          <option [ngValue]="null" disabled>Seleccionar producto...</option>
-          @for (client of getClients.value() ; track client.id) {
-              @if (client.active===true) {
-                <option [ngValue]="client">{{client.name}}</option>
-              }
-          }
-        </select>
 
-        <label for="producto">Agregar producto</label>
-        <div class="fila-agregar" >
-          <select id="producto" [(ngModel)]="selectedProduct" name="producto" >
-            <option [ngValue]="null" disabled>Seleccionar producto...</option>
-             @for (product of getProducts.value() ; track product.id) {
-              @if (product.active===true) {
-                <option [ngValue]="product">{{product.name}}</option>
-              }
+
+        <label class="resumen__titulo" for="cliente">Cliente</label>
+        <input
+        class="control"
+        type="search"
+        list="lista-clientes"
+        placeholder="Buscar por nombre o cedula"
+        autocomplete="off"
+        (input)="selectedClient.set(txtId.value)"
+        #txtId
+
+      />
+      <datalist id="lista-clientes">
+        @for (client of getClients.value(); track client) {
+            <option value="{{client.id}}">{{client.name}}</option>
+        }
+      </datalist>
+
+
+        <p class="resumen__titulo">Productos</p>
+        <input type="text" class="control" (input)="product.set(txtSearchClient.value)" placeholder="Buscar producto..."  #txtSearchClient/>
+
+        <section class="catalogo" aria-label="Productos disponibles">
+          @for (p of productosActivos() | searchProduct:product(); track p.id) {
+            <article class="tarjeta-producto">
+
+              <div class="tarjeta-foto">
+                @if (sinImagen().has(p.id!)) {
+                  <div class="foto-vacia">Sin imagen</div>
+                } @else {
+                  <img
+                    [src]="serviceImage.getImage(p.id!)"
+                    [alt]="p.name"
+                    loading="lazy"
+                    (error)="marcarSinImagen(p.id!)"
+                  />
+                }
+              </div>
+
+              <div class="tarjeta-cuerpo">
+                <h3 class="tarjeta-nombre">{{ p.name }}</h3>
+                <p class="tarjeta-precio">₡{{ p.price }}</p>
+              </div>
+
+              <button
+                type="button"
+                class="tarjeta-boton"
+                [disabled]="p.stock < 1"
+                (click)="addItem(p)"
+              >
+                {{ p.stock < 1 ? 'Agotado' : 'Agregar' }}
+              </button>
+
+            </article>
+          } @empty {
+            <p class="catalogo-vacio">No hay productos para mostrar.</p>
           }
-          </select>
-          <input type="number" min="1" value="1" (input)="amount.set(txtAmount.valueAsNumber)" #txtAmount/>
-          <button class="boton-primario" type="button" (click)="addItem()">Agregar</button>
-        </div>
+        </section>
       </section>
 
+      <!-- Columna derecha: resumen de la compra -->
       <aside class="resumen">
-        <p class="resumen__titulo">Compra actual de {{selectedClient()?.name}}</p>
+        <p class="resumen__titulo">Compra actual de {{ selectedClient() }}</p>
 
-
-          @for (item of invoiceItem(); track item.product.id) {
-            <div class="fila-item">
-              <span>{{item.product.name}} x {{item.amount}}</span>
-              <span>₡{{item.product.price}}</span>
-              <button (click)="deleteItem(item.product.id!)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6zM2 6h20m-12 5v5m4-5v5" />
-                </svg>
-              </button>
-            </div>
-          }
-        <!-- si el carrito está vacío, mostrar en su lugar: -->
-        <!-- <p class="vacio">Todavía no agregás productos.</p> -->
+        @for (item of invoiceItem(); track item.product.id) {
+          <div class="fila-item">
+            <span>{{ item.product.name }} x {{ item.amount }}</span>
+            <span>₡{{ item.product.price }}</span>
+            <button type="button" aria-label="Quitar producto" (click)="deleteItem(item.product.id!)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16l-1.58 14.22A2 2 0 0 1 16.432 22H7.568a2 2 0 0 1-1.988-1.78zm3.345-2.853A2 2 0 0 1 9.154 2h5.692a2 2 0 0 1 1.81 1.147L18 6H6zM2 6h20m-12 5v5m4-5v5" />
+              </svg>
+            </button>
+          </div>
+        }
 
         <div class="fila-total">
           <span>Total</span>
-          <span>₡{{invoiceTotal()}}</span>
+          <span>₡{{ invoiceTotal() }}</span>
         </div>
 
         <div class="fila-agregar-Factura">
-          <p class="resumen__titulo">Tipo de pago </p>
-          <select id="producto" [(ngModel)]="selectedPayment">
+          <label for="tipo-pago" class="resumen__titulo">Tipo de pago</label>
+          <select id="tipo-pago" [(ngModel)]="selectedPayment" name="tipo-pago">
             <option [ngValue]="'Contado'">Contado</option>
             <option [ngValue]="'Credito'">Credito</option>
           </select>
@@ -65,15 +101,11 @@
           Registrar en su cuenta
         </button>
 
-        @if (ErrorMessage().length>0) {
-          <span>{{ErrorMessage()}}</span>
+        @if (ErrorMessage().length > 0) {
+          <span>{{ ErrorMessage() }}</span>
         }
       </aside>
 
-
     </div>
-
   </main>
 </div>
-
-

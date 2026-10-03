@@ -6,7 +6,7 @@ import { switchMap, throwError, of } from 'rxjs';
 import { Client } from "../../Models/Client";
 import { ClientService } from "../../Service/client-service";
 import { SearchClientPipe } from "../../Pipes/search-client-pipe";
-import { EditarCliente } from './editar-cliente/editar-cliente';
+
 
 
 @Component({

@@ -1,0 +1,60 @@
+<section class="abonos">
+  <h1 class="titulo">Abonos por cliente</h1>
+
+  <div class="filtros">
+    <div class="campo">
+      <label for="cliente">Cliente</label>
+      <input
+        class="control"
+        type="search"
+        list="lista-clientes"
+        placeholder="Buscar por nombre o cedula"
+        autocomplete="off"
+        (input)="clientId.set(txtId.value)"
+        #txtId
+
+      />
+      <datalist id="lista-clientes">
+        @for (client of getClient.value(); track client) {
+            <option value="{{client.id}}">{{client.name}}</option>
+        }
+      </datalist>
+
+
+    </div>
+    <div class="div-button">
+      <button class="boton-primario" type="button" (click)="getReport()"> Buscar Reporte</button>
+    </div>
+  </div>
+
+    @if (message().length>0 || report()===null) {
+      <p class="mensaje" >{{message()}}</p>
+    }
+  <div class="tabla-contenedor">
+    <table class="tabla">
+      <caption class="solo-lector">Abonos del cliente seleccionado</caption>
+      <thead>
+        <tr>
+          <th scope="col">Fecha de pago</th>
+          <th scope="col">Período desde</th>
+          <th scope="col">Período hasta</th>
+          <th scope="col" class="num">Monto pagado</th>
+          <th scope="col" class="num">Saldo anterior</th>
+          <th scope="col" class="num">Saldo nuevo</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (report of  report(); track report.id) {
+          <tr>
+            <td>{{report.paymentDate}}</td>
+            <td>{{report.starDate}}</td>
+            <td>{{report.endDate}}</td>
+            <td class="num monto">{{report.amount}}</td>
+            <td class="num">{{report.priviuosBalance}}</td>
+            <td class="num saldo">{{report.newBalance}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

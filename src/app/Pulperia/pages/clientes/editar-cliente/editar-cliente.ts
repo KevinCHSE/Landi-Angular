@@ -16,8 +16,8 @@ export class EditarCliente {
   service=inject(ClientService)
   ActivatedRoute=inject(ActivatedRoute)
   router=inject(Router)
-  errorMessageUpdate=signal<string>("")
-  updating=signal<boolean>(true)
+  errorMessage=signal<string>("")
+  guardando=signal<boolean>(true)
 
   //URL params
   idParam:string="";
@@ -32,14 +32,14 @@ export class EditarCliente {
   constructor(){
     this.idParam= this.ActivatedRoute.snapshot.paramMap.get("id")||""
     if(!this.idParam){
-      this.errorMessageUpdate.set("No se encontro el cliente")
-      this.updating.set(false)
+      this.errorMessage.set("No se encontro el cliente")
+      this.guardando.set(false)
       return
     }
 
     this.service.getClient(this.idParam).subscribe({
       next:(client)=>{
-        this.errorMessageUpdate.set("");
+        this.errorMessage.set("");
         this.fullName.set(client.name);
         this.phone.set(client.phone);
         this.creditLimit.set(client.creditLimit)
@@ -47,14 +47,21 @@ export class EditarCliente {
         this.TotalSpent.set(client.totalSpent)
         this.active.set(client.active)
       },error:(err)=>{
-        this.errorMessageUpdate.set("No se pudo cargar el cliente");
-        this.updating.set(false)
+        this.errorMessage.set("No se pudo cargar el cliente");
+        this.guardando.set(false)
         console.log(err)
       }
     })
   }
 
   updateClient(){
+    if(!this.fullName() || !this.phone() || !this.creditLimit()){
+      this.guardando.set(false);
+      this.errorMessage.set("rellene todos los espacios")
+      return
+    }
+    this.guardando.set(true);
+
     const client:Client={
       id:this.idParam,
       name:this.fullName(),
@@ -66,13 +73,12 @@ export class EditarCliente {
     }
     this.service.updateCliente(this.idParam,client).subscribe({
       next:()=>{
-        console.log(client)
-        console.log(this.idParam)
-        this.updating.set(false);
+        this.guardando.set(false);
+        this.errorMessage.set("")
         this.router.navigate(["Pulperia/Clients"])
       },error:(err)=>{
-        this.updating.set(false);
-        this.errorMessageUpdate.set("No se logro actualizar el usuario")
+        this.guardando.set(false);
+        this.errorMessage.set("No se logro actualizar el usuario")
         console.log(err)
       }
     })

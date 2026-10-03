@@ -120,3 +120,8 @@ td {
 .btn-secondary { background: #ffffff; border: 1px solid #d1d5db; color: #374151; }
 .btn-secondary:hover { background: #f3f4f6; }
 
+.MessageError{
+  padding: 10px 20px;
+  font-size:20px;
+}
+

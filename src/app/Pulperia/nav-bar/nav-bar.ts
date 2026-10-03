@@ -20,10 +20,14 @@ export class NavBar {
   roles=this.service.roles
 
   paginas:pages[]=[
-    {name:"Inicio",url:"/Pulperia",roles:["ROLE_ADMIN"]},
+    {name:"Inicio",url:"/Pulperia/Inicio",roles:["ROLE_ADMIN"]},
     {name:"Productos",url:"/Pulperia/Products",roles:["ROLE_ADMIN","ROLE_USER"]},
     {name:"Clientes",url:"/Pulperia/Clients",roles:["ROLE_ADMIN","ROLE_USER"]},
     {name:"Carrito",url:"/Pulperia/shoppingCar",roles:["ROLE_ADMIN","ROLE_USER"]},
+    {name:"Reporto Abonos",url:"/Pulperia/paymentReport",roles:["ROLE_ADMIN"]},
+    {name:"Nuevo Usuario",url:"/Pulperia/newUser",roles:["ROLE_ADMIN"]},
+
+
   ]
 
   logOut(){

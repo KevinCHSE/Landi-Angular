@@ -1,3 +1,7 @@
+:host {
+  display: block;
+  flex: 0 0 220px;  
+}
 * {
   margin: 0;
   padding: 0;
@@ -14,11 +18,7 @@ body {
   height: 100vh;
   background-color: #1565C0; /* azul */
   color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
+  position: sticky;
   padding-top: 20px;
 }
 
