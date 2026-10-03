@@ -102,3 +102,17 @@ body {
 .btn-ingresar:hover {
   background-color: #164a89;
 }
+
+
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f4f9;
+  border-left: 4px solid #1d5fbc; /* Mismo azul del botón */
+  color: #333333;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+
+}
